@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Georama:wght@200&display=swap');
+body {
+    margin:0;
+    padding: 0;
+    background: #333;
+    opacity: 2;
+    background-size: cover;
+}
+
+.box {
+    width: 450px;
+    background:#1b262c;
+    padding: 40px;
+    text-align: center;
+    margin:auto;
+
+    margin-top: 1%;
+    color: white;
+    font-family: 'Georama', sans-serif;
+}
+.box-img {
+    
+    height:300px;
+    border-radius: 20px;
+    max-width: 100%;
+    max-height: 100%;
+
+    
+}
+
+.box h1 {
+    font-size: 20px;
+    letter-spacing: 4px;
+    font-weight: 100;
+}
+
+.box h5 {
+    font-size:15px;
+    letter-spacing: 3px;
+    font-weight: 100;
+    color: antiquewhite;
+}
+.box p {
+    text-align: justify;
+    font-size: 14px;
+}
+.director {
+    color:#ffffdd;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.director:hover {
+    letter-spacing: 5px;
+    color:orange;
+}
+#btn {
+   
+    border-radius: 0 25px 25px 0;
+    width: 150px;
+    height: 50px;
+    background: #f7c08a; 
+    color:#fff;
+    font-weight: 700;
+    font-size: 15px;
+    
+}
+
+#btn:hover {
+    letter-spacing: 2px;
+    color:black;
+}
+    

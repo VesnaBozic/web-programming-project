@@ -7,7 +7,7 @@ app = Flask(__name__, static_url_path="/")
 
 app.config["MYSQL_DATABASE_USER"] = "root"
 app.config["MYSQL_DATABASE_PASSWORD"] = "root"
-app.config["MYSQL_DATABASE_DB"] = "films"
+app.config["MYSQL_DATABASE_DB"] = "movies"
 
 mysql = MySQL(app, cursorclass=pymysql.cursors.DictCursor)
 
@@ -37,7 +37,7 @@ def get_user(user_id):
 def add_user():
     db = mysql.get_db()
     cursor = db.cursor()
-    cursor.execute("INSERT INTO users(name, surname, username, balance) VALUES(%(name)s, %(surname)s, %(username)s,%(balance)s)", flask.request.json)
+    cursor.execute("INSERT INTO users(name, surname, username, balance, user_type_id, lozinka) VALUES(%(name)s, %(surname)s, %(username)s,%(balance)s, %(user_type_id)s, %(lozinka)s)", flask.request.json)
     db.commit()
     return flask.request.json, 201
 
@@ -47,7 +47,7 @@ def change_user(user_id):
     user["user_id"] = user_id
     db = mysql.get_db()
     cursor = db.cursor()
-    cursor.execute("UPDATE users SET name=%(name)s, surname=%(surname)s, username=%(username)s,balance=%(balance)s WHERE id=%(user_id)s", user)
+    cursor.execute("UPDATE users SET name=%(name)s, surname=%(surname)s, username=%(username)s,balance=%(balance)s, user_type_id=%(user_type_id)s, lozinka=%(lozinka)s WHERE id=%(user_id)s", user)
     db.commit()
     cursor.execute("SELECT * FROM users WHERE id=%s", (user_id,))
     user = cursor.fetchone()
@@ -198,3 +198,50 @@ def remove_order(order_id):
     cursor.execute("DELETE FROM films.order WHERE order_id=%s", (order_id, ))
     db.commit()
     return ""
+
+
+#movies has order
+
+
+@app.route("/api/movieHasOrders")
+def get_all_movie_orders():
+    cursor = mysql.get_db().cursor()
+    cursor.execute("SELECT * FROM movies_has_order")
+    movie_order = cursor.fetchall()
+    return flask.jsonify(movie_order)
+
+@app.route("/api/movieHasOrders/<int:order_order_id>")
+def get_order_order(order_order_id):
+    cursor = mysql.get_db().cursor()
+    cursor.execute("SELECT * FROM movies_has_order WHERE order_order_id=%s",(order_order_id,))
+    order_order = cursor.fetchone()
+    return flask.jsonify(order_order)
+    
+@app.route("/api/movieHasOrders", methods=["POST"])
+def add_order_order():
+    db = mysql.get_db()
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO movies_has_order( movies_id, order_order_id, order_users_id, amount) VALUES( %(movies_id)s, %(order_order_id)s, %(order_users_id)s,  %(amount)s)", flask.request.json)
+    db.commit()
+    return flask.request.json, 201
+
+@app.route("/api/movieHasOrders/<int:order_order_id>", methods=["PUT"])
+def change_order_order(order_order_id):
+    order_order = dict(flask.request.json)
+    order_order["order_order_id"] = order_order_id
+    db = mysql.get_db()
+    cursor = db.cursor()
+    cursor.execute("UPDATE movies_has_order SET movies_id=%(movies_id)s, order_order_id=%(order_order_id)s, order_users_id=%(order_users_id)s, amount=%(amount)s WHERE order_order_id=%(order_order_id)s", order_order)
+    db.commit()
+    cursor.execute("SELECT * FROM movies_has_order WHERE order_order_id=%s", (order_order_id,))
+    order_order = cursor.fetchone()
+    return flask.jsonify(order_order)
+
+@app.route("/api/movieHasOrders/<int:order_order_id>", methods=["DELETE"])
+def remove_order_order(order_order_id):
+    db = mysql.get_db()
+    cursor = db.cursor()
+    cursor.execute("DELETE FROM movies_has_order WHERE order_order_id=%s", (order_order_id, ))
+    db.commit()
+    return ""
+

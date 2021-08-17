@@ -1,0 +1,90 @@
+.movie-box { 
+    
+    height: 100%;
+    width: 100%;
+    margin:0px;
+    padding-top:120px;
+    font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #333;
+    display:flex;
+    flex-flow: row wrap;
+}
+
+
+    .slider-box {
+        flex: 1 1 15%;
+        margin: 20px;
+         height:350px ;
+         width: 250px;
+         position: relative;
+         background-color: #FFFFFF;
+         border-radius:5px ;
+         display: flex;
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+
+    }
+    .slider-box a {
+        text-decoration: none;
+        text-align: center;
+    } 
+    .img-box {
+        height: 170px;
+    }
+    .img-box img{
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .time {
+        position: absolute;
+        top: 0px;
+        right: 20px;
+        color:#ffc93c;
+        font-weight: 00;
+    }
+    .detail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        font-size:15px;
+        line-height: 35px;
+        font-weight:500 ;
+    }
+    .price {
+        color: #FFFFFF;
+        background-color: black;
+        line-height: 20px;
+    }
+    .cart {
+        position: absolute;
+        bottom: 0px;
+        height: 45px;
+        background-color:#368B85;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
+        
+
+    } .cart a {
+        color:#FFFFFF;
+    }
+    .slider-box:hover {
+        box-shadow: 2px 2px 12px rgba(247, 202, 24, 1);
+    }
+    .slider-box:hover .img-box img {
+        transform: scale(1.07);
+        transition: all ease 0.3s;
+    }
+    .cart:hover {
+        transform:scale(1.1) ;
+    background-color:#ffc93c;
+     box-shadow: 2px 2px 12px rgba(47,47,47,0.40);   
+     transition: all ease 0.1s;
+        }
