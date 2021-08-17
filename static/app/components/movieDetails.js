@@ -1,5 +1,5 @@
 export default {
-    props: ["selectedMovie", "isMovieSelected"],
+    props: ["selectedMovie"],
     emits: ["goBack"],
     data() {
         return {
@@ -19,7 +19,7 @@ template: `
         <img id="movie-image" v-bind:src="selectedMovie.poster_src" alt="" class="box-img">
         <h1 id="movie-name">{{selectedMovie.name}}</h1>
         <h5 id="movie-genre">{{selectedMovie.genre}}</h5>
-        <h5 id="movie-year">2009</h5>
+        <h5 id="movie-year">{{selectedMovie.year}}</h5>
        
         <p id="movie-description">{{selectedMovie.decription}}</p>
     </div>
