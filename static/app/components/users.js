@@ -1,6 +1,6 @@
 export default {
     template: ` <div>
-    <add-user></add-user>
+    <add-user v-on:save="create"></add-user>
   
     </div>`,
     data() {

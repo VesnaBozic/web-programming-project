@@ -37,7 +37,7 @@ def get_user(user_id):
 def add_user():
     db = mysql.get_db()
     cursor = db.cursor()
-    cursor.execute("INSERT INTO users(name, surname, username, balance, user_type_id, lozinka) VALUES(%(name)s, %(surname)s, %(username)s,%(balance)s, %(user_type_id)s, %(lozinka)s)", flask.request.json)
+    cursor.execute("INSERT INTO users(name, surname, username, user_type_id, lozinka) VALUES(%(name)s, %(surname)s, %(username)s, 1, %(lozinka)s)", flask.request.json)
     db.commit()
     return flask.request.json, 201
 

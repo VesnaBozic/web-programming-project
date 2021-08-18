@@ -1,9 +1,9 @@
 export default{
-    
+    emits: ["save"],
    
     data() {
         return {
-          
+          newUser: []
         }
     },
 
@@ -36,17 +36,18 @@ export default{
 <div class="loginbox">
 
 <h1>Create new account</h1>
-<form>
+<form v-on:submit.prevent="$emit('save', {...newUser})">
     <p>Name</p>
-    <input id="user-name" type="text" name="" placeholder="Enter your name">
+    <input id="user-name" type="text" name="" placeholder="Enter your name" v-model="newUser.name">
     <p>Surname</p>
-    <input  type="text" name="" placeholder="Enter your surname">
+    <input  type="text" name="" placeholder="Enter your surname" v-model="newUser.surname">
     <p>Username</p>
-    <input id="user-username" type="text" name="" placeholder="Enter  Username">
+    <input id="user-username" type="text" name="" placeholder="Enter Username" v-model="newUser.username">
     <p>Password</p>
-    <input id="user-password" type="password" name="" placeholder="Enter Password">
-    <button type="button" name="" id="form-button">Register</button>
-    <a href="#">Already have an account?</a>
+    <input id="user-password" type="password" name="" placeholder="Enter Password" v-model="newUser.lozinka">
+    <input type="submit" name="" id="form-button" value="Create new account">
+    
+    <a href="#/login">Already have an account? Go and login!</a>
 </form>
 </div>
 
