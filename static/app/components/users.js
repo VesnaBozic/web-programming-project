@@ -1,8 +1,7 @@
 export default {
     template: ` <div>
-    <user-form v-on:sacuvaj="create" v-bind:tekst="'Dodaj'"></user-form>
-    <user-form v-bind:user="korisnikZaIzmenu" v-bind:tekst="'Izmeni'" v-on:sacuvaj="update"></user-form>
-    <table-user v-bind:users="users" v-on:uklanjanje="remove" v-on:izmena="setKorisnikZaIzmenu"></table-user>
+    <add-user></add-user>
+  
     </div>`,
     data() {
         return {

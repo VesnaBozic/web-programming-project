@@ -1,5 +1,13 @@
-export default {
-    template:`
+export default{
+    
+   
+    data() {
+        return {
+          
+        }
+    },
+
+    template: `
 
     <nav  class="navbar navbar-expand-lg navbar-dark bg-dark" >
     <div class="container-fluid">
@@ -16,43 +24,38 @@ export default {
           <li class="nav-item">
             <a class="nav-link" href="#">Log in</a>
           </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#/createAccount">Create Account</a>
-        </li>
-         
-      
-        </ul>
-
-      </div>
+            </ul>
+         </div>
+       </div>
     </div>
   </nav>
 
-  <div id="showcase"> 
-  <div class="container">
-      <div class="showcase-content">
-          <h1><span class="span-text">Your</span> MOVIES</h1>
-          <p class="lead">Welcome to your favorite movie site</p>
-         <router-link to="/movies"> <a class="btn" href="#">Check our movies</a> </router-link>
-         
-      </div>
-  </div>
+<div class="form">
+
+
+<div class="loginbox">
+
+<h1>Create new account</h1>
+<form>
+    <p>Name</p>
+    <input id="user-name" type="text" name="" placeholder="Enter your name">
+    <p>Surname</p>
+    <input  type="text" name="" placeholder="Enter your surname">
+    <p>Username</p>
+    <input id="user-username" type="text" name="" placeholder="Enter  Username">
+    <p>Password</p>
+    <input id="user-password" type="password" name="" placeholder="Enter Password">
+    <button type="button" name="" id="form-button">Register</button>
+    <a href="#">Already have an account?</a>
+</form>
+</div>
 
 </div>
 
 <footer id="main-footer">
     <p>Your MOVIES &copy; 2021, All Rights reserved</p>    
 </footer>
- 
-    `,
-    data() {
-        return {
 
-        }
-    },
-    methods: {
-       
-    }, 
-    created() {
-  
-    }  
+
+    `
 }

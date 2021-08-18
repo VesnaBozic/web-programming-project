@@ -30,6 +30,9 @@ export default {
           <li class="nav-item">
             <a class="nav-link" href="#">Log in</a>
           </li>
+          <li class="nav-item">
+          <a class="nav-link" href="#/createAccount">Create account</a>
+        </li>
          
       
         </ul>
@@ -52,7 +55,7 @@ export default {
     <p  > {{movie.name}} </p>
     <p class="price" > {{movie.price}} $</p>
     <div class="cart">
-    <a href="#" >Buy </a>
+    <a href="#/createAccount" >Buy </a>
     </div>
     </div> 
   </div>

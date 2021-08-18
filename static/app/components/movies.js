@@ -2,7 +2,7 @@ export default {
     template: ` 
 
     <table-movies v-if="isMovieSelected === false && isMovieSearched === false" v-bind:movies="movies" v-on:chooseMovie="setMovie" v-on:searchMovies="searchMovies"> </table-movies>
-    <searched-movies v-if="isMovieSelected === false && isMovieSearched === true" v-bind:searchedMovies="searchedMovies" v-on:chooseMovie="setMovie"> </searched-movies>
+    <searched-movies v-on:goBackSearched="goBackSearched" v-if="isMovieSelected === false && isMovieSearched === true" v-bind:searchedMovies="searchedMovies" v-on:chooseMovie="setMovie"> </searched-movies>
    
     <movie-details v-if="isMovieSelected == true" v-bind:selectedMovie="selectedMovie"  v-on:goBack="goBack"> </movie-details>
     
@@ -33,6 +33,11 @@ export default {
         },
         goBack(a) {
             this.isMovieSelected = a;
+            this.$router.go();
+        },
+
+        goBackSearched(a) {
+            this.isMovieSearched = a;
             this.$router.go();
         },
 
