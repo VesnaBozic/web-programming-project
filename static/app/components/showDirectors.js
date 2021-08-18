@@ -1,5 +1,22 @@
 export default {
-    template: ` <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+    props: ["directors"],
+    emits: ["chooseDirector"],
+
+
+    data() {
+        return {
+
+
+
+        }
+    },
+
+
+
+
+    template: ` 
+   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
     <div class="container-fluid">
   
       <router-link  class="navbar-brand" class="nav-link active" to="/">Home</router-link>
@@ -9,7 +26,7 @@ export default {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-          <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
+          <router-link to="/movies"class="nav-link active" aria-current="page" >Movies</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Log in</a>
@@ -17,57 +34,35 @@ export default {
          
       
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+  
       </div>
     </div>
   </nav>
  
-  <div class="movie-box" v-if="condition != 'true'">
-    <div class="slider-box" v-for="movie in movies">
+  <div class="movie-box">
+    <div class="slider-box" v-for="director in directors">
     
-    <p class="time"> {{movie.genre}}</p>
     <div class="img-box">
-      <router-link to="/movieDetails" v-on:click="setMovieZaIzmenu(movie)" >
-      <img v-bind:src="movie.poster_src" >
       
-       </router-link>
+      <img v-bind:src="director.image_src">
+      
       
     </div>
-    <p class="detail"> {{movie.name}} </p>
-    <p class="price" > {{movie.price}} $</p>
+    <p class="detail"> {{director.name}} {{director.surname}} </p>
+   
+    
     <div class="cart">
-    <a href="#" >Buy </a>
+    <button  v-on:click="$emit('chooseDirector', {...director})">My movies </button>
     </div>
     </div> 
   </div>
-
-  
   
   
    <footer id="main-footer">
     <p>Your MOVIES &copy; 2021, All Rights reserved</p>    
    </footer>
-
-  
-  `,
-    data() {
-        return {
-          
-           
+    
+`
 
 
-        }
-    },
-    methods: {
-
-
-    },
-    created() {
-     
-
-
-    }
 }

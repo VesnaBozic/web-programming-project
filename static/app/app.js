@@ -7,6 +7,8 @@ import Movies from"./components/movies.js"
 import MovieDetails from "./components/movieDetails.js"
 import TableMovies  from "./components/tableMovies.js";
 import SearchedMovies from "./components/searchedMovies.js"
+import ShowDirectors from "./components/showDirectors.js";
+import DirectorMovies from "./components/directorMovies.js";
 
 
 import Directors from "./components/directors.js"
@@ -38,8 +40,11 @@ const router = VueRouter.createRouter({
 const app = Vue.createApp(Store);
 app.component('table-user', TableUser);
 app.component('user-form', UserForm);
-app.component('table-movies', TableMovies)
-app.component('searched-movies', SearchedMovies)
+app.component('table-movies', TableMovies);
+app.component('searched-movies', SearchedMovies);
+app.component('show-directors', ShowDirectors);
+app.component('director-movies', DirectorMovies)
+
 
 
 app.component('movie-details', MovieDetails);

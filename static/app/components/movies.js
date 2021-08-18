@@ -45,6 +45,7 @@ export default {
         refreshData() {
             axios.get("api/movies").then((response) => {
                 this.movies = response.data;
+               
             });
         },
 

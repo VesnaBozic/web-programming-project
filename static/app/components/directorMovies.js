@@ -1,11 +1,13 @@
 export default {
-    props: ["searchedMovies"],
-    emits: ["chooseMovie"],
+    props: ["directorMovies"],
+    
     
     data() {
         return {
 
-           }
+          
+            
+        }
     },
 
  
@@ -23,7 +25,7 @@ export default {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-          <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
+          <a class="nav-link" href="#/directors" v-on:click="$emit('goBack', 'false')"  >Directors</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Log in</a>
@@ -31,13 +33,13 @@ export default {
          
       
         </ul>
-  
+        
       </div>
     </div>
   </nav>
  
   <div class="movie-box" >
-    <div class="slider-box" v-for="movie in searchedMovies">
+    <div class="slider-box" v-for="movie in directorMovies">
     
     <p class="time"> {{movie.genre}}</p>
     <div class="img-box">
@@ -47,7 +49,7 @@ export default {
        
       
     </div>
-    <button class="movie-button"  v-on:click="$emit('chooseMovie', {...movie})"> {{movie.name}} </button>
+    <p  > {{movie.name}} </p>
     <p class="price" > {{movie.price}} $</p>
     <div class="cart">
     <a href="#" >Buy </a>

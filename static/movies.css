@@ -88,3 +88,13 @@
      box-shadow: 2px 2px 12px rgba(47,47,47,0.40);   
      transition: all ease 0.1s;
         }
+   .cart button {
+    font-size: 16px;
+    display: inline-block;
+    color: white;
+    background: #368B85;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+   }

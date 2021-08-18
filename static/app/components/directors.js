@@ -1,100 +1,78 @@
 export default {
-    template: ` <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
-    <div class="container-fluid">
-  
-      <router-link  class="navbar-brand" class="nav-link active" to="/">Home</router-link>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-          <router-link to="/movies"class="nav-link active" aria-current="page" >Movies</router-link>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Log in</a>
-          </li>
-         
-      
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
- 
-  <div class="movie-box">
-    <div class="slider-box" v-for="director in directors">
-    
-    <div class="img-box">
-      <a href="#">
-      <img v-bind:src="director.image_src">
-      
-       </a>
-    </div>
-    <p class="detail"> {{director.name}} {{director.surname}} </p>
-   
-    
-    <div class="cart">
-    <a href="#">My movies </a>
-    </div>
-    </div> 
-  </div>
-  
-  
-   <footer id="main-footer">
-    <p>Your MOVIES &copy; 2021, All Rights reserved</p>    
-   </footer>
+  template: ` 
+
+    <show-directors v-if="isDirectorSelected == false" v-bind:directors="directors" v-on:chooseDirector="setDirector" > </show-directors>
+    <director-movies v-if="isDirectorSelected == true" v-bind:directorMovies="directorMovies" v-on:goBack="goBack" > </director-movies>
   `,
-    data() {
-        return {
-            directors: [],
-            directorZaIzmenu: {},
-
-        }
-    },
-    methods: {
-
-
-        setDirectorZaIzmenu(director) {
-
-            this.directorZaIzmenu = { ...director };
-
-        },
-        refreshData() {
-            axios.get("api/directors").then((response) => {
-                this.directors = response.data;
-            });
-        },
-
-
-        remove(id) {
-
-            axios.delete(`api/directors/${id}`).then((response) => {
-                this.refreshData();
-            });
-        },
-
-
-        create(director) {
-            axios.post("api/directors", director).then((response) => {
-                this.refreshData()
-            });
-        },
-
-
-        update(director) {director
-
-            axios.put(`/api/directors/${director.id}`, director).then((response) => {
-                this.refreshData();
-            });
-        }
-    },
-    created() {
-        this.refreshData();
-
+  data() {
+    return {
+      directors: [],
+      director: {},
+      movies: [],
+      isDirectorSelected: false,
+      directorMovies:[]
 
     }
+  },
+  methods: {
+    goBack(a) {
+      this.isDirectorSelected = a;
+      this.$router.go();
+  },
+      refreshDataMovies() {
+      axios.get("api/movies").then((response) => {
+        this.movies = response.data;
+
+      });
+    },
+
+    setDirector(director) {
+
+      this.director = { ...director };
+      for (let i = 0; i < this.movies.length; i++){
+        if(this.movies[i].directors_id == this.director.id){
+          this.directorMovies.push(this.movies[i]);
+        }
+      }
+      console.log(this.directorMovies);
+      console.log(this.isDirectorSelected)
+      this.isDirectorSelected = true;
+
+    },
+    refreshData() {
+      axios.get("api/directors").then((response) => {
+        this.directors = response.data;
+
+      });
+    },
+
+
+    remove(id) {
+
+      axios.delete(`api/directors/${id}`).then((response) => {
+        this.refreshData();
+      });
+    },
+
+
+    create(director) {
+      axios.post("api/directors", director).then((response) => {
+        this.refreshData()
+      });
+    },
+
+
+    update(director) {
+
+      axios.put(`/api/directors/${director.id}`, director).then((response) => {
+        this.refreshData();
+      });
+    }
+  },
+  created() {
+    this.refreshData();
+    this.refreshDataMovies();
+
+
+  }
 }
