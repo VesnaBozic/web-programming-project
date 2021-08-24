@@ -2,6 +2,11 @@ import flask
 from flask import Flask
 from flaskext.mysql import MySQL
 from flaskext.mysql import pymysql
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import JWTManager
+from flask_jwt_extended import jwt_required
+
+
 
 app = Flask(__name__, static_url_path="/")
 
@@ -9,6 +14,10 @@ app.config["MYSQL_DATABASE_USER"] = "root"
 app.config["MYSQL_DATABASE_PASSWORD"] = "root"
 app.config["MYSQL_DATABASE_DB"] = "movies"
 
+
+
+app.config["JWT_SECRET_KEY"] = "fdjkdfjkl;flfrlkwrjkgr"  
+jwt = JWTManager(app)
 mysql = MySQL(app, cursorclass=pymysql.cursors.DictCursor)
 
 @app.route("/")
@@ -16,7 +25,18 @@ def home():
     return app.send_static_file("index.html")
 
 #users
+@app.route("/api/login", methods=["POST"])
+def login():
+    cursor = mysql.get_db().cursor()
+    cursor.execute("SELECT * FROM users WHERE username=%(username)s and lozinka=%(lozinka)s", flask.request.json)
+    user = cursor.fetchone()
+    if user is not None:
+        access_token = create_access_token(identity=user["username"])
+        return flask.jsonify(access_token),200
+    return "", 403
+
 @app.route("/api/users")
+
 def get_all_users():
     cursor = mysql.get_db().cursor()
     cursor.execute("SELECT * FROM users")
@@ -37,9 +57,13 @@ def get_user(user_id):
 def add_user():
     db = mysql.get_db()
     cursor = db.cursor()
-    cursor.execute("INSERT INTO users(name, surname, username, user_type_id, lozinka) VALUES(%(name)s, %(surname)s, %(username)s, 1, %(lozinka)s)", flask.request.json)
-    db.commit()
-    return flask.request.json, 201
+    try:
+        cursor.execute("INSERT INTO users(name, surname, username, user_type_id, lozinka) VALUES(%(name)s, %(surname)s, %(username)s, 1, %(lozinka)s)", flask.request.json)
+        db.commit()
+        return flask.request.json, 201
+    except:
+        print("Error")
+        return "", 403
 
 @app.route("/api/users/<int:user_id>", methods=["PUT"])
 def change_user(user_id):

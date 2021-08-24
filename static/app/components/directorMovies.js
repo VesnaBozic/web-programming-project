@@ -28,7 +28,7 @@ export default {
           <a class="nav-link" href="#/directors" v-on:click="$emit('goBack', 'false')"  >Directors</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Log in</a>
+            <a class="nav-link" href="#/login">Log in</a>
           </li>
           <li class="nav-item">
           <a class="nav-link" href="#/createAccount">Create account</a>
@@ -55,7 +55,7 @@ export default {
     <p  > {{movie.name}} </p>
     <p class="price" > {{movie.price}} $</p>
     <div class="cart">
-    <a href="#/createAccount" >Buy </a>
+    <a href="#/createAccount">Buy </a>
     </div>
     </div> 
   </div>

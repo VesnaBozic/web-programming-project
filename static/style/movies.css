@@ -84,11 +84,12 @@
     }
     .cart:hover {
         transform:scale(1.1) ;
-    background-color:#ffc93c;
-     box-shadow: 2px 2px 12px rgba(47,47,47,0.40);   
+    background-color: #ffc93c;
+     box-shadow: 4px 4px 24px rgba(47,47,47,0.40);   
      transition: all ease 0.1s;
         }
-   .cart button {
+   
+    .cart{
     font-size: 16px;
     display: inline-block;
     color: white;
@@ -96,5 +97,15 @@
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    
+   }
+
+   .cart button {
+       background: #368B85;
+       border: none;
+       
+   }
+
+   .cart button:hover{
+      background-color: #ffc93c;
    }

@@ -14,7 +14,7 @@ export default {
            <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Log in</a>
+            <a class="nav-link" href="#/login">Log in</a>
           </li>
           <li class="nav-item">
           <a class="nav-link" href="#/createAccount">Create Account</a>

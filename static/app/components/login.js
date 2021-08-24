@@ -1,9 +1,9 @@
 export default{
-    emits: ["save"],
+ 
    
     data() {
         return {
-          newUser: []
+            
         }
     },
 
@@ -22,7 +22,7 @@ export default{
            <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#/login">Log in</a>
+            <a class="nav-link" href="#/createAccount">Create account</a>
           </li>
             </ul>
          </div>
@@ -33,21 +33,17 @@ export default{
 <div class="form">
 
 
-<div class="loginbox">
+<div class="loginbox2">
 
-<h1>Create new account</h1>
-<form v-on:submit.prevent="$emit('save', {...newUser})">
-    <p>Name</p>
-    <input id="user-name" type="text" name="" placeholder="Enter your name" v-model="newUser.name" required>
-    <p>Surname</p>
-    <input  type="text" name="" placeholder="Enter your surname" v-model="newUser.surname" required>
-    <p>Username</p>
-    <input id="user-username" type="text" name="" placeholder="Enter Username" v-model="newUser.username" required>
-    <p>Password</p>
-    <input id="user-password" type="password" name="" placeholder="Enter Password" v-model="newUser.lozinka" required>
-    <input type="submit" name="" id="form-button" value="Create new account">
+<h1>Login</h1>
+<form>
+    <p>Username: </p>
+    <input id="user-name" type="text" name="" placeholder="Enter your username" required >
+    <p>Password: </p>
+    <input id="user-password" type="password" name="" placeholder="Enter Password" required>
+    <input type="submit" name="" id="form-button" value="Login">
     
-    <a href="#/login">Already have an account? Go and login!</a>
+    <a href="#/createAccount">Don't have an account? Go and create!</a>
 </form>
 </div>
 

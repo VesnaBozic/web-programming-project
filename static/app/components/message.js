@@ -1,17 +1,20 @@
 export default {
-    props: ["searchedMovies"],
-    emits: ["chooseMovie","goBackSearched"],
+    props: ["messageType"],
+ 
     
     data() {
         return {
 
-           }
+          
+            
+        }
     },
 
  
 
     
     template: ` 
+
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
     <div class="container-fluid">
@@ -26,8 +29,11 @@ export default {
           <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#/movies" v-on:click="$emit('goBackSearched', 'false')">Movies</a>
+            <a class="nav-link" href="#/login">Log in</a>
           </li>
+          <li class="nav-item">
+          <a class="nav-link" v-on:click="$emit('goBack', 'false')" href="#/createAccount">Create account</a>
+        </li>
          
       
         </ul>
@@ -35,23 +41,24 @@ export default {
       </div>
     </div>
   </nav>
- 
-  <div class="movie-box" >
-    <div class="slider-box" v-for="movie in searchedMovies">
-    
-    <p class="time"> {{movie.genre}}</p>
-    <div class="img-box">
-     
-      <img v-bind:src="movie.poster_src" >
-      
-</div>
-    <button class="movie-button"  v-on:click="$emit('chooseMovie', {...movie})"> {{movie.name}} </button>
-    <p class="price" > {{movie.price}} $</p>
-    <div class="cart">
-    <a href="#/createAccount" >Buy </a>
+   
+       <div class="form">
+        <div v-if="messageType == 'accountCreated'" class="alert alert-info" role="alert">
+        
+        Account created! You can log in!
+        <a class="nav-link" href="#/login">Login</a>
+        </div>
+
+        <div v-if="messageType ==  'failed'" class="alert alert-warning" role="alert">
+           That username already exist! Try again!
+           <a class="nav-link" href="#/createAccount" v-on:click="$emit('goBack', 'false')">Create account</a>
+        </div>
+
     </div>
-    </div> 
-  </div>
+
+  
+  
+  
    <footer id="main-footer">
     <p>Your MOVIES &copy; 2021, All Rights reserved</p>    
    </footer>

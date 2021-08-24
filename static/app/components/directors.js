@@ -34,8 +34,7 @@ export default {
           this.directorMovies.push(this.movies[i]);
         }
       }
-      console.log(this.directorMovies);
-      console.log(this.isDirectorSelected)
+      
       this.isDirectorSelected = true;
 
     },

@@ -29,7 +29,7 @@ export default {
           <router-link to="/movies"class="nav-link active" aria-current="page" >Movies</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Log in</a>
+            <a class="nav-link" href="#/login">Log in</a>
           </li>
 
           <li class="nav-item">
@@ -55,9 +55,9 @@ export default {
     <p class="detail"> {{director.name}} {{director.surname}} </p>
    
     
-    <div class="cart">
-    <button  v-on:click="$emit('chooseDirector', {...director})">My movies </button>
-    </div>
+    
+    <button class="cart"  v-on:click="$emit('chooseDirector', {...director})">My movies </button>
+  
     </div> 
   </div>
   
