@@ -11,16 +11,20 @@ import AddUserForm from "./components/addUserForm.js";
 import Login from "./components/login.js";
 import User from "./components/user.js";
 import Message from "./components/message.js";
+import Profile from "./components/profile.js";
+import UserProfile from "./components/userProfile.js";
+import MyProfile from "./components/myProfile.js";
+
 
 
 import Directors from "./components/directors.js"
 
 
-// axios.interceptors.request.use(config => {
-//   let token = localStorage.getItem("token");
-//   Object.assign(config.headers, { "Authorization": `Bearer ${token}` });
-//   return config;
-// });
+axios.interceptors.request.use(config => {
+  let token = localStorage.getItem("token");
+  Object.assign(config.headers, { "Authorization": `Bearer ${token}` });
+  return config;
+});
 
 
 const router = VueRouter.createRouter({
@@ -29,19 +33,16 @@ const router = VueRouter.createRouter({
     routes: [
        
         {path:"/", component: Main},
-        // {path: "/", component: Login},
+       
         {path: "/login", component: User},
         
         {path: "/movies", component: Movies},
         {path: "/directors", component: Directors},
         {path: "/createAccount", component: Users},
-        
-
-       
-       
-       
-    ],
-  })
+        {path: "/profile", component: Profile},
+        {path: "/myProfile", component: MyProfile},
+        ],
+ })
 const app = Vue.createApp(Store);
 
 app.component('table-movies', TableMovies);
@@ -51,10 +52,8 @@ app.component('director-movies', DirectorMovies);
 app.component('add-user', AddUserForm);
 app.component('login-page', Login);
 app.component('message-page', Message);
-
-
-
+app.component('user-profile', UserProfile);
 app.component('movie-details', MovieDetails);
-// app.component('rezervacija-forma', RezervacijaForma);
+
 app.use(router);
 app.mount("#app");

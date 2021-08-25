@@ -1,15 +1,9 @@
 export default{
- 
-   
-    data() {
-        return {
-            
-        }
-    },
+
 
     template: `
 
-    <nav  class="navbar navbar-expand-lg navbar-dark bg-dark" >
+    <nav v-if="message === false" class="navbar navbar-expand-lg navbar-dark bg-dark" >
     <div class="container-fluid">
   
       <router-link  class="navbar-brand" class="nav-link active" to="/movies">Movies</router-link>
@@ -30,17 +24,17 @@ export default{
     </div>
   </nav>
 
-<div class="form">
+<div v-if="message === false" class="form">
 
 
 <div class="loginbox2">
 
 <h1>Login</h1>
-<form>
+<form v-on:submit.prevent="login()">
     <p>Username: </p>
-    <input id="user-name" type="text" name="" placeholder="Enter your username" required >
+    <input id="user-name" type="text" name="" placeholder="Enter your username" v-model="user.username" required >
     <p>Password: </p>
-    <input id="user-password" type="password" name="" placeholder="Enter Password" required>
+    <input id="user-password" type="password" name="" placeholder="Enter Password" v-model="user.lozinka" required>
     <input type="submit" name="" id="form-button" value="Login">
     
     <a href="#/createAccount">Don't have an account? Go and create!</a>
@@ -49,10 +43,44 @@ export default{
 
 </div>
 
-<footer id="main-footer">
+<footer v-if="message === false" id="main-footer">
     <p>Your MOVIES &copy; 2021, All Rights reserved</p>    
 </footer>
 
 
-    `
+<message-page v-on:goBack="goBack" v-if="message === true" v-bind:messageType="messageType"> </message-page>
+
+
+    `,
+
+    data() {
+      return {
+          user:{
+              "username":"",
+              "lozinka": ""
+          }, 
+          messageType: '',
+          message: false
+      }
+  },
+  methods: {
+    goBack(a) {
+      this.message = a;
+      this.$router.go();
+  },
+     login(){
+        axios.post(`api/login`, this.user).then((response)=> {
+            
+            localStorage.setItem("token",response.data);
+            
+            this.$router.push("/profile");
+        }, _ =>{
+            this.messageType = "failedLogin";
+            this.message = true;
+        }) 
+     }
+  }, 
+  created() {
+
+  }  
 }

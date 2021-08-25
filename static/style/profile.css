@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Georama:wght@200&display=swap');
+.profile{
+top:50%;
+left: 50%;
+position: absolute;
+transform: translate(-50%,-50%);
+box-sizing: border-box;
+font-family: 'Georama', sans-serif;
+font-weight: bold;
+
+}
+
+
+.inputs input[type = "text"], input[type="password"],.loginbox2 input[type = "text"], input[type="password"]
+{
+    border: none;
+    border-bottom:1px solid #000 ;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
+    background-color: #F1E9E5;
+}

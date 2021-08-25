@@ -38,11 +38,6 @@ export default {
         },
 
 
-        update(user) {
-
-            axios.put(`/api/users/${user.id}`, user).then((response) => {
-                this.refreshData();});
-        }
     }, 
     created() {
         this.refreshData();

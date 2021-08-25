@@ -54,6 +54,13 @@ export default {
            <a class="nav-link" href="#/createAccount" v-on:click="$emit('goBack', 'false')">Create account</a>
         </div>
 
+        <div v-if="messageType ==  'failedLogin'" class="alert alert-warning" role="alert">
+        Wrong password or username! Try again!
+        <a class="nav-link" href="#/login" v-on:click="$emit('goBack', 'false')">Login</a>
+
+
+     </div>
+
     </div>
 
   

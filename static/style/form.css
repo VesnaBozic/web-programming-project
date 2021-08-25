@@ -108,8 +108,8 @@ h1 {
     
     width: 350px;
     height: 250px;
-    background:#368B85;
-    color:#F6A9A9;
+    background:#EEEEEE;
+    color:rgb(39, 38, 38);
     font-size: large;
     font-weight: bold;
     top:50%;
@@ -121,7 +121,7 @@ h1 {
 }
 
 .alert .nav-link{
-    color: #fff;
+    color: #F6A9A9;;
 }
 
 .alert .nav-link:hover {
