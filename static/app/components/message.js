@@ -57,9 +57,12 @@ export default {
         <div v-if="messageType ==  'failedLogin'" class="alert alert-warning" role="alert">
         Wrong password or username! Try again!
         <a class="nav-link" href="#/login" v-on:click="$emit('goBack', 'false')">Login</a>
+        </div>
 
-
-     </div>
+        <div v-if="messageType ==  'accountDeleted'" class="alert alert-warning" role="alert">
+        Sorry to see you leave! Your account is deleted! 
+        <a class="nav-link" href="#/createAccount" v-on:click="$emit('goBack', 'false')">Create new account</a>
+        </div>
 
     </div>
 

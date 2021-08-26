@@ -1,6 +1,6 @@
 export default{
     props: ["movies","loggedUser", "userType"],
-    emits: ["logOut"],
+    emits: ["logOut", "buyMovie", "clickedB","chooseMovie"],
     
     data() {
         return {}
@@ -43,7 +43,7 @@ export default{
     <button class="movie-button"  v-on:click="$emit('chooseMovie', {...movie})"> {{movie.name}} </button>
     <p class="price" > {{movie.price}} $</p>
     <div class="cart">
-    <a>Buy</a>
+    <button class="movie-button"  v-on:click="$emit('clickedB', 'true')" v-on:click="$emit('buyMovie', {...movie})">Buy</button>
     </div>
     </div> 
   </div>

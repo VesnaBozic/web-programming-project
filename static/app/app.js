@@ -14,6 +14,7 @@ import Message from "./components/message.js";
 import Profile from "./components/profile.js";
 import UserProfile from "./components/userProfile.js";
 import MyProfile from "./components/myProfile.js";
+import Cart from "./components/cart.js";
 
 
 
@@ -41,6 +42,7 @@ const router = VueRouter.createRouter({
         {path: "/createAccount", component: Users},
         {path: "/profile", component: Profile},
         {path: "/myProfile", component: MyProfile},
+       
         ],
  })
 const app = Vue.createApp(Store);
@@ -54,6 +56,7 @@ app.component('login-page', Login);
 app.component('message-page', Message);
 app.component('user-profile', UserProfile);
 app.component('movie-details', MovieDetails);
+app.component('user-cart', Cart);
 
 app.use(router);
 app.mount("#app");

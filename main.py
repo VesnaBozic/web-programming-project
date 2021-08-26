@@ -106,12 +106,15 @@ def change_user(user_id):
     user["user_id"] = user_id
     db = mysql.get_db()
     cursor = db.cursor()
-    cursor.execute("UPDATE users SET name=%(name)s, surname=%(surname)s, username=%(username)s,balance=%(balance)s, user_type_id=%(user_type_id)s, lozinka=%(lozinka)s WHERE id=%(user_id)s", user)
-    db.commit()
-    cursor.execute("SELECT * FROM users WHERE id=%s", (user_id,))
-    user = cursor.fetchone()
-    
-    return flask.jsonify(user)
+    try:
+        cursor.execute("UPDATE users SET name=%(name)s, surname=%(surname)s, username=%(username)s,balance=%(balance)s, user_type_id=%(user_type_id)s, lozinka=%(lozinka)s WHERE id=%(user_id)s", user)
+        db.commit()
+        cursor.execute("SELECT * FROM users WHERE id=%s", (user_id,))
+        user = cursor.fetchone()
+        return flask.jsonify(user)
+    except:
+        print("Error")
+        return "", 403
 
 @app.route("/api/users/<int:user_id>", methods=["DELETE"])
 @jwt_required()
@@ -238,7 +241,7 @@ def get_order(order_id):
 def add_order():
     db = mysql.get_db()
     cursor = db.cursor()
-    cursor.execute("INSERT INTO order( movies_id, users_id, price, purchase_date) VALUES( %(movies_id)s, %(users_id)s, %(price)s,  %(purchase_date)s)", flask.request.json)
+    cursor.execute("INSERT INTO movies.order( price, purchase_date, users_id) VALUES(  %(price)s,  %(purchase_date)s, %(users_id)s)", flask.request.json)
     db.commit()
     return flask.request.json, 201
 

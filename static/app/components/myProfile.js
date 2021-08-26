@@ -1,7 +1,7 @@
 export default {
     template: ` 
 
-
+   <div  v-if="message === false">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
     <div class="container-fluid">
   
@@ -52,6 +52,13 @@ export default {
             <div class="col-md-6">
                 <div class="inputs"> <label>Password</label> <input class="form-control" type="text" v-model="loggedUser.lozinka" > </div>
             </div>
+            <div v-if="updated === true" class="col-md-6" class="alert-success" id="profile-alert" role="alert">
+            You successfully updated your profile!
+            </div>
+            <div v-if="failedUpdate === true" class="col-md-6" class="alert-success" id="profile-alert" role="alert">
+            That username already exist!
+            </div>
+          
         </div>
   
         <div class="mt-3 gap-2 d-flex justify-content-end"> <button class="px-3 btn btn-sm btn-outline-primary"  v-on:click.prevent="goBack()">Cancel</button> 
@@ -62,11 +69,20 @@ export default {
 </div>
 
 
+<message-page v-on:goBack="goBack" v-if="message === true" v-bind:messageType="messageType"> </message-page>
+
+
      `,
     data() {
       return {
         loggedUser: [],
         userType:"",
+        updated: false,
+        condition: false,
+        failedUpdate : false,
+        message: false,
+        messageType:""
+       
          }
     },
     methods: {
@@ -74,14 +90,32 @@ export default {
             this.$router.push("/profile");
         },
         update(user) {
+        this.condition = false;
+        this.updated = false;
+        this.failedUpdate = false
+          axios.put(`/api/users/${user.id}`, user).then((response) => {
+                this.refreshData();
+                this.updated = true;
+                this.condition = true;
+              
+            });
+            if (this.condition == false){
 
-            axios.put(`/api/users/${user.id}`, user).then((response) => {
-                this.refreshData();});
+                this.failedUpdate = true;
+              
+            }
+            
+                
+                
         },
 
         remove(id) {
             axios.delete(`api/users/${id}`).then((response) => {
             this.refreshData();});
+            this.messageType = "accountDeleted";
+            this.message = true;
+            
+           
         },
         logOut(){
             localStorage.removeItem("token");

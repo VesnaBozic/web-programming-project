@@ -26,7 +26,7 @@ export default {
         create(user) {
             axios.post("api/users", user).then((response) => {
                 this.messageType = "accountCreated";
-                this.message = true
+                this.message = true;
                 this.$router.push("/createAccount");
                 
             },_ =>{
