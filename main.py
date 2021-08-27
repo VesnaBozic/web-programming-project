@@ -28,17 +28,21 @@ def home():
 #users
 @app.route("/api/login", methods=["POST"])
 def login():
-    cursor = mysql.get_db().cursor()
-    cursor.execute("SELECT * FROM users WHERE username=%(username)s and lozinka=%(lozinka)s", flask.request.json)
-    user = cursor.fetchone()
-    cursor.execute("SELECT * FROM user_type WHERE id=%s",(user["user_type_id"],))
-    roles = cursor.fetchone()
-    
-    if user is not None:
-        access_token = create_access_token(identity=user["username"], additional_claims={"roles":roles["naziv"], "id":user["id"]})
+    try:
+        cursor = mysql.get_db().cursor()
+        cursor.execute("SELECT * FROM users WHERE username=%(username)s and lozinka=%(lozinka)s", flask.request.json)
+        user = cursor.fetchone()
+        cursor.execute("SELECT * FROM user_type WHERE id=%s",(user["user_type_id"],))
+        roles = cursor.fetchone()
         
-        return flask.jsonify(access_token),200
-    return "", 403
+        if user is not None:
+            access_token = create_access_token(identity=user["username"], additional_claims={"roles":roles["naziv"], "id":user["id"]})
+            
+            return flask.jsonify(access_token),200
+        return "", 403
+    except:
+        return "", 403
+
 
 @app.route("/api/logged", methods=["GET"])
 @jwt_required()
@@ -112,6 +116,7 @@ def change_user(user_id):
 def remove_user(user_id):
     db = mysql.get_db()
     cursor = db.cursor()
+    cursor.execute("DELETE FROM movies.order WHERE users_id=%s", (user_id, ))
     cursor.execute("DELETE FROM users WHERE id=%s", (user_id, ))
     db.commit()
     return ""

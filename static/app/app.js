@@ -35,9 +35,7 @@ const router = VueRouter.createRouter({
     routes: [
        
         {path:"/", component: Main},
-       
         {path: "/login", component: User},
-        
         {path: "/movies", component: Movies},
         {path: "/directors", component: Directors},
         {path: "/createAccount", component: Users},

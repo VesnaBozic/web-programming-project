@@ -3,8 +3,10 @@ export default {
         return {
         }
     },
+    
     methods: {
     },
+    
     created() {
     }
 }

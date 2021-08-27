@@ -1,45 +1,34 @@
 export default {
-    template: ` <div>
-    
-    <login-page> </login-page>
-    
-  
-    </div >`,
+    template: ` 
+    <div>
+        <login-page> </login-page>
+     </div >
+     `,
     data() {
         return {
-            users: [],
-        
-           
-     
-        }
+            users: [], }
     },
     methods: {
-  
-     
-  
+
         refreshData() {
             axios.get("api/users").then((response) => {
                 this.users = response.data;
             });
         },
-  
-    
+
         remove(id) {
             axios.delete(`api/users/${id}`).then((response) => {
-            this.refreshData();});
+                this.refreshData();
+            });
         },
-
 
         create(user) {
             axios.post("api/users", user).then((response) => {
-            this.refreshData() });
+                this.refreshData()
+            });
         },
-
-
-    }, 
+    },
     created() {
         this.refreshData();
-        
-       
-    }  
+ }
 }

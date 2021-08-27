@@ -1,27 +1,22 @@
 export default {
     template: `
-   
- 
-    <div>
+<div>
     <add-user  v-if="message === false" v-on:save="create"></add-user>
     <message-page v-on:goBack="goBack" v-if="message === true" v-bind:messageType="messageType"> </message-page>
-  
-    </div>`,
+</div>`,
+    
     data() {
         return {
             message: false,
             messageType:""
-
         }
     },
     methods: {
-
 
         goBack(a) {
             this.message = a;
             this.$router.go();
         },
-
 
         create(user) {
             axios.post("api/users", user).then((response) => {
@@ -35,14 +30,8 @@ export default {
                 this.message = true;
                 return;
             }
-            
-            );
-        },
-
+            );},
     },
     created() {
-
-
-
-    }
+}
 }
