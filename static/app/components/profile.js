@@ -2,7 +2,7 @@ export default {
 
     data() {
         return {
-            loggedUser: [],
+            loggedUser: {},
             userType: "",
             movie:{},
             movies: [],
@@ -10,7 +10,9 @@ export default {
             isMovieSelected: false,
             movieBuyClicked: false,
             order: {},
-            moviesHasOrder: {}
+            moviesHasOrder: {},
+            notEnoughMoney: false,
+            enoughMoney: false,
         }
     },
     methods: {
@@ -23,11 +25,20 @@ export default {
             this.order.price = movie.price;
             this.order.purchase_date = date;
             this.order.users_id = this.loggedUser.id;
+            this.order.movies_id = movie.id;
             console.log(this.movie)
             console.log(this.order)
-            
+            if((this.loggedUser.balance - this.order.price) > 0) {
             axios.post("api/orders", this.order).then((response) => {
-                });
+                this.loggedUser.balance -= this.order.price;
+                this.enoughMoney = true;
+                axios.put(`/api/users/${this.loggedUser.id}`, this.loggedUser).then((response) => {
+                     });
+                });}
+            
+            else {
+                this.notEnoughMoney = true;
+            }
           
             
             
@@ -97,7 +108,7 @@ export default {
      <div v-if="isMovieSelected === true && movieBuyClicked === false">
      <movie-details v-bind:selectedMovie="selectedMovie"  v-on:goBack="goBack" > </movie-details>
     </div> 
-    <user-cart v-on:createOrder="createOrder" v-if="movieBuyClicked != false" v-bind:loggedUser="loggedUser" v-bind:movie="movie" v-on:clickedBtn="clickedBtn"> </user-cart>
+    <user-cart v-on:createOrder="createOrder" v-if="movieBuyClicked != false" v-bind:loggedUser="loggedUser" v-bind:notEnoughMoney="notEnoughMoney" v-bind:enoughMoney="enoughMoney" v-bind:movie="movie" v-on:clickedBtn="clickedBtn"> </user-cart>
      
      `,
 }

@@ -14,7 +14,7 @@ export default {
             <a class="nav-link" href="#/myProfile">{{loggedUser.name}} profile</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="#/createAccount">My cart</a>
+          <a class="nav-link" href="#/myOrders">My orders</a>
         </li>
          
       
@@ -75,7 +75,7 @@ export default {
      `,
     data() {
       return {
-        loggedUser: [],
+        loggedUser: {},
         userType:"",
         updated: false,
         condition: false,
@@ -92,11 +92,12 @@ export default {
         update(user) {
         this.condition = false;
         this.updated = false;
-        this.failedUpdate = false
+        this.failedUpdate = false;
           axios.put(`/api/users/${user.id}`, user).then((response) => {
                 this.refreshData();
                 this.updated = true;
                 this.condition = true;
+                this.failedUpdate = false;
               
             });
             if (this.condition == false){

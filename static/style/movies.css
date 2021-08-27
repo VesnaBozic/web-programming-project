@@ -109,3 +109,8 @@
    .cart button:hover{
       background-color: #ffc93c;
    }
+
+   .d-flex{
+       width: 400px;
+   }
+

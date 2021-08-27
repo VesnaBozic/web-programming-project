@@ -8,17 +8,15 @@ export default {
     data() {
         return {
             users: [],
-            korisnikZaIzmenu: {},
-            pageOn:""
+        
+           
      
         }
     },
     methods: {
   
      
-        setKorisnikZaIzmenu(user) {
-            this.korisnikZaIzmenu = { ...user };
-        },
+  
         refreshData() {
             axios.get("api/users").then((response) => {
                 this.users = response.data;

@@ -77,15 +77,6 @@ def get_all_users():
 
     return flask.jsonify(users)
 
-# @app.route("/api/users/<int:user_id>")
-# @jwt_required()
-# def get_user_(user_id):
-#     cursor = mysql.get_db().cursor()
-#     cursor.execute("SELECT * FROM users WHERE id=%s",(user_id,))
-#     user = cursor.fetchone()
-#     return flask.jsonify(user)
-   
-
 
 @app.route("/api/users", methods=["POST"])
 def add_user():
@@ -224,97 +215,26 @@ def remove_director(director_id):
 @jwt_required()
 def get_all_orders():
     cursor = mysql.get_db().cursor()
-    cursor.execute("SELECT * FROM order")
-    order = cursor.fetchall()
-    return flask.jsonify(order)
-
-@app.route("/api/orders/<int:order_id>")
-@jwt_required()
-def get_order(order_id):
-    cursor = mysql.get_db().cursor()
-    cursor.execute("SELECT * FROM order WHERE order_id=%s",(order_id,))
-    order = cursor.fetchone()
-    return flask.jsonify(order)
+    cursor.execute("SELECT name, poster_src, movies.price, purchase_date, users_id FROM movies INNER JOIN movies.order ON movies.id=movies.order.movies_id")
+    orders = cursor.fetchall()
+    myOrders =[]
+    for order in orders:
+        if (order["users_id"] == get_jwt().get("id")):
+            myOrders.append(order)
     
+    return flask.jsonify(myOrders)
+
+
 @app.route("/api/orders", methods=["POST"])
 @jwt_required()
 def add_order():
     db = mysql.get_db()
     cursor = db.cursor()
-    cursor.execute("INSERT INTO movies.order( price, purchase_date, users_id) VALUES(  %(price)s,  %(purchase_date)s, %(users_id)s)", flask.request.json)
+    cursor.execute("INSERT INTO movies.order( price, purchase_date, users_id, movies_id) VALUES(  %(price)s,  %(purchase_date)s, %(users_id)s, %(movies_id)s)", flask.request.json)
     db.commit()
     return flask.request.json, 201
 
-@app.route("/api/orders/<int:order_id>", methods=["PUT"])
-@jwt_required()
-def change_order(order_id):
-    order = dict(flask.request.json)
-    order["order_id"] = order_id
-    db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("UPDATE order SET movies_id=%(movies_id)s, users_id=%(users_id)s, price=%(price)s, purchase_date=%(purchase_date)s WHERE order_id=%(order_id)s", order)
-    db.commit()
-    cursor.execute("SELECT * FROM order WHERE order_id=%s", (order_id,))
-    order = cursor.fetchone()
-    return flask.jsonify(order)
-
-@app.route("/api/orders/<int:order_id>", methods=["DELETE"])
-@jwt_required()
-def remove_order(order_id):
-    db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("DELETE FROM order WHERE order_id=%s", (order_id, ))
-    db.commit()
-    return ""
 
 
-#movies has order
 
-
-@app.route("/api/movieHasOrders")
-@jwt_required()
-def get_all_movie_orders():
-    cursor = mysql.get_db().cursor()
-    cursor.execute("SELECT * FROM movies_has_order")
-    movie_order = cursor.fetchall()
-    return flask.jsonify(movie_order)
-
-@app.route("/api/movieHasOrders/<int:order_order_id>")
-@jwt_required()
-def get_order_order(order_order_id):
-    cursor = mysql.get_db().cursor()
-    cursor.execute("SELECT * FROM movies_has_order WHERE order_order_id=%s",(order_order_id,))
-    order_order = cursor.fetchone()
-    return flask.jsonify(order_order)
-    
-@app.route("/api/movieHasOrders", methods=["POST"])
-@jwt_required()
-def add_order_order():
-    db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("INSERT INTO movies_has_order( movies_id, order_order_id, order_users_id, amount) VALUES( %(movies_id)s, %(order_order_id)s, %(order_users_id)s,  %(amount)s)", flask.request.json)
-    db.commit()
-    return flask.request.json, 201
-
-@app.route("/api/movieHasOrders/<int:order_order_id>", methods=["PUT"])
-@jwt_required()
-def change_order_order(order_order_id):
-    order_order = dict(flask.request.json)
-    order_order["order_order_id"] = order_order_id
-    db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("UPDATE movies_has_order SET movies_id=%(movies_id)s, order_order_id=%(order_order_id)s, order_users_id=%(order_users_id)s, amount=%(amount)s WHERE order_order_id=%(order_order_id)s", order_order)
-    db.commit()
-    cursor.execute("SELECT * FROM movies_has_order WHERE order_order_id=%s", (order_order_id,))
-    order_order = cursor.fetchone()
-    return flask.jsonify(order_order)
-
-@app.route("/api/movieHasOrders/<int:order_order_id>", methods=["DELETE"])
-@jwt_required()
-def remove_order_order(order_order_id):
-    db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("DELETE FROM movies_has_order WHERE order_order_id=%s", (order_order_id, ))
-    db.commit()
-    return ""
 

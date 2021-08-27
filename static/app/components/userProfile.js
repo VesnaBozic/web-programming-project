@@ -19,7 +19,7 @@ export default{
             <a class="nav-link" href="#/myProfile">{{loggedUser.name}} profile</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="#/createAccount">My cart</a>
+          <a class="nav-link" href="#/myOrders">My orders</a>
         </li>
          
       
@@ -42,9 +42,9 @@ export default{
     </div>
     <button class="movie-button"  v-on:click="$emit('chooseMovie', {...movie})"> {{movie.name}} </button>
     <p class="price" > {{movie.price}} $</p>
-    <div class="cart">
-    <button class="movie-button"  v-on:click="$emit('clickedB', 'true')" v-on:click="$emit('buyMovie', {...movie})">Buy</button>
-    </div>
+  
+    <button class="cart"   v-on:click="$emit('clickedB', 'true')" v-on:click="$emit('buyMovie', {...movie})">Buy</button>
+ 
     </div> 
   </div>
 
