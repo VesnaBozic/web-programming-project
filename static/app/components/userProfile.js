@@ -14,8 +14,11 @@ export default{
         <li class="nav-item">
           <a class="nav-link" href="#/myProfile">{{loggedUser.name}} profile</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item"  v-if="userType == 'korisnik'">
           <a class="nav-link" href="#/myOrders">My orders</a>
+        </li>
+        <li class="nav-item"  v-if="userType == 'administrator'">
+          <a class="nav-link" href="#/addAdministrator">Add new administrator</a>
         </li>
       </ul>
       <button v-on:click="$emit('logOut')" class="btn btn-outline-success" type="submit">Log out</button>
@@ -31,8 +34,9 @@ export default{
     </div>
     <button class="movie-button"  v-on:click="$emit('chooseMovie', {...movie})"> {{movie.name}} </button>
     <p class="price" > {{movie.price}} $</p>
-    <button class="cart" v-on:click="$emit('clickedB', 'true')" v-on:click="$emit('buyMovie', {...movie})">Buy</button>
-  </div> 
+    <button v-if="userType == 'korisnik'" class="cart" v-on:click="$emit('clickedB', 'true')" v-on:click="$emit('buyMovie', {...movie})">Buy</button>
+    <button v-if="userType == 'administrator'" class="cart">Edit</button>
+    </div> 
 </div>
 
 <footer id="main-footer">

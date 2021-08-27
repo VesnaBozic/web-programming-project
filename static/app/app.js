@@ -16,6 +16,7 @@ import UserProfile from "./components/userProfile.js";
 import MyProfile from "./components/myProfile.js";
 import Cart from "./components/cart.js";
 import MyOrders from "./components/myOrders.js";
+import AddAdministrator from "./components/addAdmin.js";
 
 
 
@@ -42,6 +43,7 @@ const router = VueRouter.createRouter({
         {path: "/profile", component: Profile},
         {path: "/myProfile", component: MyProfile},
         {path: "/myOrders", component: MyOrders},
+        {path: "/addAdministrator", component: AddAdministrator},
        
         ],
  })

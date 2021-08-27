@@ -34,10 +34,8 @@ def login():
         user = cursor.fetchone()
         cursor.execute("SELECT * FROM user_type WHERE id=%s",(user["user_type_id"],))
         roles = cursor.fetchone()
-        
         if user is not None:
             access_token = create_access_token(identity=user["username"], additional_claims={"roles":roles["naziv"], "id":user["id"]})
-            
             return flask.jsonify(access_token),200
         return "", 403
     except:
@@ -64,22 +62,9 @@ def get_user_type():
     users = cursor.fetchall()
     for user in users:
         if user["id"] == get_jwt().get("id"):
-            print(get_jwt().get("roles"))
             return flask.jsonify(get_jwt().get("roles"))
-    
     return "", 404
 
-
-
-
-@app.route("/api/users")
-@jwt_required()
-def get_all_users():
-    cursor = mysql.get_db().cursor()
-    cursor.execute("SELECT * FROM users")
-    users = cursor.fetchall()
-
-    return flask.jsonify(users)
 
 
 @app.route("/api/users", methods=["POST"])
@@ -94,6 +79,20 @@ def add_user():
         print("Error")
         return "", 403
 
+@app.route("/api/administrator", methods=["POST"])
+@jwt_required()
+def add_administrator():
+    db = mysql.get_db()
+    cursor = db.cursor()
+    if(get_jwt().get("roles") == "administrator"):
+        try:
+            cursor.execute("INSERT INTO users(name, surname, username, user_type_id, lozinka) VALUES(%(name)s, %(surname)s, %(username)s, 2, %(lozinka)s)", flask.request.json)
+            db.commit()
+            return flask.request.json, 201
+        except:
+            print("Error")
+            return "", 403
+
 @app.route("/api/users/<int:user_id>", methods=["PUT"])
 @jwt_required()
 def change_user(user_id):
@@ -101,15 +100,26 @@ def change_user(user_id):
     user["user_id"] = user_id
     db = mysql.get_db()
     cursor = db.cursor()
-    try:
-        cursor.execute("UPDATE users SET name=%(name)s, surname=%(surname)s, username=%(username)s,balance=%(balance)s, user_type_id=%(user_type_id)s, lozinka=%(lozinka)s WHERE id=%(user_id)s", user)
-        db.commit()
-        cursor.execute("SELECT * FROM users WHERE id=%s", (user_id,))
-        user = cursor.fetchone()
-        return flask.jsonify(user)
-    except:
-        print("Error")
-        return "", 403
+    if(get_jwt().get("roles") == "korisnik"):
+        try:
+            cursor.execute("UPDATE users SET name=%(name)s, surname=%(surname)s, username=%(username)s,balance=%(balance)s, user_type_id=%(user_type_id)s, lozinka=%(lozinka)s WHERE id=%(user_id)s", user)
+            db.commit()
+            cursor.execute("SELECT * FROM users WHERE id=%s", (user_id,))
+            user = cursor.fetchone()
+            return flask.jsonify(user)
+        except:
+            print("Error")
+            return "", 403
+    elif(get_jwt().get("roles") == "administrator"):
+        try:
+            cursor.execute("UPDATE users SET name=%(name)s, surname=%(surname)s, username=%(username)s, user_type_id=%(user_type_id)s, lozinka=%(lozinka)s WHERE id=%(user_id)s", user)
+            db.commit()
+            cursor.execute("SELECT * FROM users WHERE id=%s", (user_id,))
+            user = cursor.fetchone()
+            return flask.jsonify(user)
+        except:
+            print("Error")
+            return "", 403
 
 @app.route("/api/users/<int:user_id>", methods=["DELETE"])
 @jwt_required()

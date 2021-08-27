@@ -9,9 +9,12 @@ export default {
                 <li class="nav-item">
                     <a class="nav-link" href="#/myProfile">{{loggedUser.name}} profile</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" v-if="userType == 'korisnik'">
                     <a class="nav-link" href="#/myOrders">My orders</a>
                 </li>
+                <li class="nav-item" v-if="userType == 'administrator'">
+                <a class="nav-link" href="#/addAdministrator">Add new administrator</a>
+            </li>
             </ul>
             <button v-on:click="$emit('logOut')" class="btn btn-outline-success" type="submit">Log out</button>
         </div>
@@ -37,7 +40,7 @@ export default {
             <div class="col-md-6">
                 <div class="inputs"> <label>Username</label> <input class="form-control" type="text" v-model="loggedUser.username"  > </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" v-if="userType == 'korisnik'">
                 <div class="inputs"> <label>Balance</label> <input class="form-control" type="text" v-model="loggedUser.balance"  > </div>
             </div>
             <div class="col-md-6">
@@ -50,9 +53,10 @@ export default {
                 That username already exist!
             </div>
         </div>
-        <div class="mt-3 gap-2 d-flex justify-content-end"> <button class="px-3 btn btn-sm btn-outline-primary"  v-on:click.prevent="goBack()">Go back</button> 
-        <button class="px-3 btn btn-sm btn-primary" v-on:click.prevent="update(loggedUser)">Save</button> 
-        <button class="px-3 btn btn-sm btn-primary" v-on:click.prevent="remove(loggedUser.id)" >Delete profile</button> </div></div>
+        <div class="mt-3 gap-2 d-flex "> 
+        <button class="px-3 btn  btn-outline-primary"  v-on:click.prevent="goBack()">Go back</button> 
+        <button class="px-3 btn btn-primary" v-on:click.prevent="update(loggedUser)">Save</button> 
+        <button class="px-3 btn btn-primary" v-on:click.prevent="remove(loggedUser.id)" >Delete profile</button> </div></div>
         </div>
     </form>
 </div>
@@ -73,6 +77,7 @@ export default {
     },
     methods: {
         goBack(a) {
+            console.log(this.userType);
             this.$router.push("/profile");
         },
 
