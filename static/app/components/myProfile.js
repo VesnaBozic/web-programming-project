@@ -7,16 +7,22 @@ export default {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#/myProfile">{{loggedUser.name}} profile</a>
+                    <router-link class="nav-link" to="/myProfile">{{loggedUser.name}} profile</router-link>
                 </li>
                 <li class="nav-item" v-if="userType == 'korisnik'">
-                    <a class="nav-link" href="#/myOrders">My orders</a>
+                    <router-link class="nav-link" to="/myOrders">My orders</router-link>
                 </li>
                 <li class="nav-item" v-if="userType == 'administrator'">
-                <a class="nav-link" href="#/addAdministrator">Add new administrator</a>
-            </li>
+                    <router-link class="nav-link" to="/addAdministrator">Add new administrator</router-link>
+                </li>
+                <li class="nav-item" v-if="userType == 'administrator'">
+                    <router-link class="nav-link" to="/addMovie">Add new movie</router-link>
+                </li>
+                <li class="nav-item" v-if="userType == 'administrator'">
+                    <router-link class="nav-link" to="/directors">Directors</router-link>
+                </li>
             </ul>
-            <button v-on:click="$emit('logOut')" class="btn btn-outline-success" type="submit">Log out</button>
+            <button v-on:click.prevent="logOut()" class="btn btn-outline-success" type="submit">Log out</button>
         </div>
     </div>
 </nav>
@@ -24,8 +30,8 @@ export default {
 <div class="profile">
     <form class="mt-3">
         <div class="card p-3 text-center">
-            <div class="d-flex flex-row justify-content-center mb-3">
-                <div class="d-flex flex-column ms-3 user-details">
+            <div>
+                <div class="user-details">
                     <h4 class="mb-0">{{loggedUser.name}} {{loggedUser.surname}}</h4>
                 </div>
             </div>

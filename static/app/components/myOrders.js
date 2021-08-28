@@ -41,10 +41,10 @@ export default {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#/myProfile">{{loggedUser.name}} profile</a>
+                    <router-link class="nav-link" to="/myProfile">{{loggedUser.name}} profile</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#/profile">Home</a>
+                    <router-link class="nav-link" to="/profile">Home</router-link>
                 </li>
             </ul>
         </div>
@@ -81,7 +81,7 @@ export default {
         <div class="column text-lg">Money you spent: <span class="text-medium">{{amount.toFixed(2)}}$</span></div>
     </div>
     <div class="shopping-cart-footer">                                                                                                    
-        <div  class="column"><a href="#/profile"><button  class="btn">Go Back</button></a></div>
+        <div  class="column"><router-link to="/profile" class="btn">Go Back</router-link></div>
     </div>
 </div>
  `,

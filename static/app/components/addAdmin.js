@@ -7,14 +7,13 @@ export default {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#/myProfile">{{loggedUser.name}} profile</a>
+                    <router-link class="nav-link" to="/myProfile">{{loggedUser.name}} profile</router-link>
                 </li>
-        
-                <li class="nav-item">
-                <a class="nav-link" href="#/profile">Home</a>
-            </li>
+               <li class="nav-item">
+                    <router-link class="nav-link" to="/profile">Home</router-link>
+               </li>
             </ul>
-            <button v-on:click="$emit('logOut')" class="btn btn-outline-success" type="submit">Log out</button>
+            <button v-on:click.prevent="logOut()" class="btn btn-outline-success" type="submit">Log out</button>
         </div>
     </div>
 </nav>

@@ -18,10 +18,7 @@ export default {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#/movies" v-on:click="$emit('goBackSearched', 'false')">Movies</a>
+          <router-link class="nav-link" to="/movies" v-on:click="$emit('goBackSearched', 'false')">Movies</router-link>
         </li>
       </ul>
     </div>
@@ -37,7 +34,7 @@ export default {
   <button class="movie-button"  v-on:click="$emit('chooseMovie', {...movie})"> {{movie.name}} </button>
     <p class="price" > {{movie.price}} $</p>
   <div class="cart">
-    <a href="#/createAccount" >Buy </a>
+    <router-link class="buy-btn" to="/createAccount" >Buy </router-link>
   </div>
   </div> 
   </div>

@@ -10,10 +10,7 @@ template: `
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#/createAccount">Create account</a>
+        <router-link  class="navbar-brand" class="nav-link active" to="/createAccount">Create account</router-link>
         </li>
       </ul>
     </div>
@@ -23,14 +20,14 @@ template: `
 
 <div v-if="message === false" class="form">
   <div class="loginbox2">
-  <h1>Login</h1>
+  <h1>Sign in</h1>
     <form v-on:submit.prevent="login()">
       <p>Username: </p>
         <input id="user-name" type="text" name="" placeholder="Enter your username" v-model="user.username" required >
       <p>Password: </p>
         <input id="user-password" type="password" name="" placeholder="Enter Password" v-model="user.lozinka" required>
         <input type="submit" name="" id="form-button" value="Login">
-      <a href="#/createAccount">Don't have an account? Go and create!</a>
+      <router-link to="/createAccount"><a>Don't have an account? Go and create!</a></router-link>
     </form>
   </div>
 </div>

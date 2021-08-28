@@ -19,10 +19,10 @@ export default {
           <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#/login">Log in</a>
+          <router-link class="nav-link" to="/login">Log in</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" v-on:click="$emit('goBack', 'false')" href="#/createAccount">Create account</a>
+          <router-link class="nav-link" v-on:click="$emit('goBack', 'false')" to="/createAccount">Create account</router-link>
         </li>
       </ul>
     </div>
@@ -32,22 +32,22 @@ export default {
 <div class="form">
   <div v-if="messageType == 'accountCreated'" class="alert alert-info" role="alert">
         Account created! You can log in!
-    <a class="nav-link" href="#/login">Login</a>
+    <router-link class="nav-link" to="/login">Login</router-link>
   </div>
 
   <div v-if="messageType ==  'failed'" class="alert alert-warning" role="alert">
         That username already exist! Try again!
-    <a class="nav-link" href="#/createAccount" v-on:click="$emit('goBack', 'false')">Create account</a>
+    <router-link class="nav-link" to="/createAccount" v-on:click="$emit('goBack', 'false')">Create account</router-link>
   </div>
 
   <div v-if="messageType ==  'failedLogin'" class="alert alert-warning" role="alert">
         Wrong password or username! Try again!
-    <a class="nav-link" href="#/login" v-on:click="$emit('goBack', 'false')">Login</a>
+    <router-link class="nav-link" to="/login" v-on:click="$emit('goBack', 'false')">Sign in</router-link>
   </div>
 
   <div v-if="messageType ==  'accountDeleted'" class="alert alert-warning" role="alert">
         Sorry to see you leave! Your account is deleted! 
-    <a class="nav-link" href="#/createAccount" v-on:click="$emit('goBack', 'false')">Create new account</a>
+    <router-link class="nav-link" to="/createAccount" v-on:click="$emit('goBack', 'false')">Create new account</router-link>
   </div>
 
 </div>

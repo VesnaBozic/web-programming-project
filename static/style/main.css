@@ -47,7 +47,7 @@
 }
 
 #showcase {
-    background: url('../posteri/pozadina.jpg') no-repeat center;
+    background: url('../posteri/pozadina1.jpg') no-repeat center;
     
     height:800px; }
 
@@ -71,7 +71,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #333;
+    background-color: #64C9CF;
     color: #fff;
     opacity:0.6;
     width: 100%;

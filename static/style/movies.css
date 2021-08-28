@@ -5,7 +5,7 @@
     margin:0px;
     padding-top:120px;
     font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #333;
+    background: #C9CCD5;
     display:flex;
     flex-flow: row wrap;
 }
@@ -69,12 +69,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        color: #FFFFFF;
        
         
 
-    } .cart a {
-        color:#FFFFFF;
-    }
+    } 
     .slider-box:hover {
         box-shadow: 2px 2px 12px rgba(247, 202, 24, 1);
     }
@@ -113,4 +112,11 @@
    .d-flex{
        width: 400px;
    }
+   .buy-btn {
+       color: #FFFFFF;
+   }
+
+   .buy-btn:hover {
+    color: #368B85;
+}
 

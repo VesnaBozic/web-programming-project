@@ -6,7 +6,6 @@ import MovieDetails from "./components/movieDetails.js"
 import TableMovies  from "./components/tableMovies.js";
 import SearchedMovies from "./components/searchedMovies.js"
 import ShowDirectors from "./components/showDirectors.js";
-import DirectorMovies from "./components/directorMovies.js";
 import AddUserForm from "./components/addUserForm.js";
 import Login from "./components/login.js";
 import User from "./components/user.js";
@@ -17,10 +16,13 @@ import MyProfile from "./components/myProfile.js";
 import Cart from "./components/cart.js";
 import MyOrders from "./components/myOrders.js";
 import AddAdministrator from "./components/addAdmin.js";
+import Directors from "./components/directors.js";
+import AddDirector from "./components/addDirector.js";
+import EditDirector from "./components/editDirector.js";
 
 
 
-import Directors from "./components/directors.js"
+
 
 
 axios.interceptors.request.use(config => {
@@ -52,13 +54,14 @@ const app = Vue.createApp(Store);
 app.component('table-movies', TableMovies);
 app.component('searched-movies', SearchedMovies);
 app.component('show-directors', ShowDirectors);
-app.component('director-movies', DirectorMovies);
 app.component('add-user', AddUserForm);
 app.component('login-page', Login);
 app.component('message-page', Message);
 app.component('user-profile', UserProfile);
 app.component('movie-details', MovieDetails);
 app.component('user-cart', Cart);
+app.component('edit-director', EditDirector);
+app.component('add-director', AddDirector);
 
 app.use(router);
 app.mount("#app");

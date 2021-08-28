@@ -17,14 +17,11 @@ export default {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
+          <router-link  class="navbar-brand" class="nav-link active" to="/login">Sign in</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#/login">Log in</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#/createAccount">Create account</a>
-        </li>
+          <router-link  class="navbar-brand" class="nav-link active" to="/createAccount">Create account</router-link>
+         </li>
       </ul>
       <form class="d-flex" v-on:submit.prevent="$emit('searchMovies',word)">
           <input v-model="word" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -43,7 +40,7 @@ export default {
     <button class="movie-button"  v-on:click="$emit('chooseMovie', {...movie})"> {{movie.name}} </button>
     <p class="price" > {{movie.price}} $</p>
     <div class="cart">
-      <a href="#/createAccount">Buy </a>
+     <router-link class="buy-btn"  to="/createAccount">Buy</router-link> 
     </div>
     </div> 
   </div>

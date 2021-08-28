@@ -11,10 +11,10 @@ export default{
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#/myProfile">{{loggedUser.name}} profile</a>
+                    <router-link class="nav-link" to="/myProfile">{{loggedUser.name}} profile</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#/profile">Home</a>
+                    <router-link class="nav-link" to="/profile">Home</router-link>
                 </li>
             </ul>
         </div>
@@ -35,9 +35,9 @@ export default{
                 <tr  v-for="order in myOrders">
                     <td>
                         <div class="product-item">
-                            <a class="product-thumb" href="#"><img v-bind:src="order.poster_src" alt="Product"></a>
+                            <a class="product-thumb" ><img v-bind:src="order.poster_src" alt="Product"></a>
                             <div class="product-info">
-                                <h4 class="product-title"><a href="#">{{order.name}}</a></h4>
+                                <h4 class="product-title"><a>{{order.name}}</a></h4>
                             </div>
                         </div>
                     </td>

@@ -17,10 +17,7 @@ export default{
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-           <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#/login">Log in</a>
+          <router-link  class="navbar-brand" class="nav-link active" to="/login">Sign in</router-link>
           </li>
             </ul>
         </div>
@@ -42,7 +39,7 @@ export default{
         <p>Password</p>
           <input id="user-password" type="password" name="" placeholder="Enter Password" v-model="newUser.lozinka" required>
           <input type="submit" name="" id="form-button" value="Create new account">
-        <a href="#/login">Already have an account? Go and login!</a>
+          <router-link to="/login"><a>Already have an account? Go and login!</a></router-link>
     </form>
   </div>
 </div>

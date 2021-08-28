@@ -152,6 +152,7 @@ def get_movie(movie_id):
 
 
 @app.route("/api/movies", methods=["POST"])
+@jwt_required()
 def add_movies():
     db = mysql.get_db()
     cursor = db.cursor()
@@ -160,6 +161,7 @@ def add_movies():
     return flask.request.json, 201
 
 @app.route("/api/movies/<int:movie_id>", methods=["PUT"])
+@jwt_required()
 def change_movie(movie_id):
     movie = dict(flask.request.json)
     movie["movie_id"] = movie_id
@@ -172,6 +174,7 @@ def change_movie(movie_id):
     return flask.jsonify(movie)
 
 @app.route("/api/movies/<int:movie_id>", methods=["DELETE"])
+@jwt_required()
 def remove_movie(movie_id):
     db = mysql.get_db()
     cursor = db.cursor()
@@ -182,11 +185,13 @@ def remove_movie(movie_id):
 # # # directors
 
 @app.route("/api/directors")
+@jwt_required()
 def get_all_directors():
     cursor = mysql.get_db().cursor()
-    cursor.execute("SELECT * FROM directors")
-    directors = cursor.fetchall()
-    return flask.jsonify(directors)
+    if(get_jwt().get("roles") == "administrator"):
+        cursor.execute("SELECT * FROM directors")
+        directors = cursor.fetchall()
+        return flask.jsonify(directors)
 
 @app.route("/api/directors/<int:director_id>")
 def get_director(director_id):
@@ -196,6 +201,7 @@ def get_director(director_id):
     return flask.jsonify(director)
     
 @app.route("/api/directors", methods=["POST"])
+@jwt_required()
 def add_directors():
     db = mysql.get_db()
     cursor = db.cursor()
@@ -204,6 +210,7 @@ def add_directors():
     return flask.request.json, 201
 
 @app.route("/api/directors/<int:director_id>", methods=["PUT"])
+@jwt_required()
 def change_director(director_id):
     director = dict(flask.request.json)
     director["director_id"] = director_id
@@ -216,12 +223,17 @@ def change_director(director_id):
     return flask.jsonify(director)
 
 @app.route("/api/directors/<int:director_id>", methods=["DELETE"])
+@jwt_required()
 def remove_director(director_id):
     db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("DELETE FROM directors WHERE id=%s", (director_id, ))
-    db.commit()
-    return ""
+    try:
+        cursor = db.cursor()
+        cursor.execute("DELETE FROM directors WHERE id=%s", (director_id, ))
+        db.commit()
+        return ""
+    except:
+        print("Error")
+        return "", 403
 
 
 #orders

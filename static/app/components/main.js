@@ -10,13 +10,10 @@ export default {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <router-link to="/directors"class="nav-link active" aria-current="page" >Directors</router-link>
+          <router-link  class="navbar-brand" class="nav-link active" to="/login">Sign in</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#/login">Log in</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#/createAccount">Create Account</a>
+          <router-link  class="navbar-brand" class="nav-link active" to="/createAccount">Create account</router-link>
         </li>
       </ul>
       </div>
@@ -28,7 +25,7 @@ export default {
       <div class="showcase-content">
           <h1><span class="span-text">Your</span> MOVIES</h1>
           <p class="lead">Welcome to your favorite movie site</p>
-          <router-link to="/movies"> <a class="btn" href="#">Check our movies</a> </router-link>
+          <router-link to="/movies"> <a class="btn">Check our movies</a> </router-link>
       </div>
   </div>
 </div>
