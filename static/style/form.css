@@ -62,7 +62,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-.loginbox input[type = "text"], input[type="password"],.loginbox2 input[type = "text"], input[type="password"]
+.loginbox input[type = "text"], input[type="password"],.loginbox2 input[type = "text"], input[type="password"], input[type="number"]
 {
     border: none;
     border-bottom:1px solid #000 ;
@@ -72,6 +72,10 @@ h1 {
     color: #000;
     font-size: 16px;
     background-color: #F1E9E5;
+}
+
+.ta {
+background-color: #F1E9E5;
 }
 
 #form-button {

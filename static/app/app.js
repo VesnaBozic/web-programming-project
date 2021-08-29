@@ -19,6 +19,8 @@ import AddAdministrator from "./components/addAdmin.js";
 import Directors from "./components/directors.js";
 import AddDirector from "./components/addDirector.js";
 import EditDirector from "./components/editDirector.js";
+import AddMovie from "./components/addMovie.js"
+import EditMovie from "./components/editMovie.js"
 
 
 
@@ -46,6 +48,8 @@ const router = VueRouter.createRouter({
         {path: "/myProfile", component: MyProfile},
         {path: "/myOrders", component: MyOrders},
         {path: "/addAdministrator", component: AddAdministrator},
+        {path: "/addMovie", component: AddMovie},
+        
        
         ],
  })
@@ -62,6 +66,8 @@ app.component('movie-details', MovieDetails);
 app.component('user-cart', Cart);
 app.component('edit-director', EditDirector);
 app.component('add-director', AddDirector);
+app.component('edit-movie', EditMovie);
+
 
 app.use(router);
 app.mount("#app");

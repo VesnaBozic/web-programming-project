@@ -31,13 +31,13 @@ export default{
         <h4>Add new director</h4>
         <div class="row">
             <div class="col-md-6">
-                <div class="inputs"> <label>Name</label> <input class="form-control" type="text" v-model="newDirector.name" > </div>
+                <div class="inputs"> <label>Name</label> <input class="form-control" type="text" v-model="newDirector.name" required > </div>
             </div>
             <div class="col-md-6">
-            <div class="inputs"> <label>Surname</label> <input class="form-control" type="text" v-model="newDirector.surname"  > </div>
+            <div class="inputs"> <label>Surname</label> <input class="form-control" type="text" v-model="newDirector.surname" required > </div>
         </div>
             <div class="col-md-6">
-                <div class="inputs"> <label>Image link</label> <input class="form-control" type="text" v-model="newDirector.image_src"  > </div>
+                <div class="inputs"> <label>Image link</label> <input class="form-control" type="text" v-model="newDirector.image_src" required > </div>
             </div>
         </div>
         <div v-if="created === true" class="col-md-6" class="alert-success" id="profile-alert" role="alert">

@@ -26,7 +26,7 @@ template: `
         <input id="user-name" type="text" name="" placeholder="Enter your username" v-model="user.username" required >
       <p>Password: </p>
         <input id="user-password" type="password" name="" placeholder="Enter Password" v-model="user.lozinka" required>
-        <input type="submit" name="" id="form-button" value="Login">
+        <input type="submit" name="" id="form-button" value="Sign in">
       <router-link to="/createAccount"><a>Don't have an account? Go and create!</a></router-link>
     </form>
   </div>

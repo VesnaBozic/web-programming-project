@@ -31,21 +31,25 @@ export default {
    
 <div class="form">
   <div v-if="messageType == 'accountCreated'" class="alert alert-info" role="alert">
+        <p><i class="far fa-thumbs-up"></i> </p>
         Account created! You can log in!
     <router-link class="nav-link" to="/login">Login</router-link>
   </div>
 
   <div v-if="messageType ==  'failed'" class="alert alert-warning" role="alert">
+  <p> <i class="fas fa-exclamation-triangle"></i> </p>
         That username already exist! Try again!
     <router-link class="nav-link" to="/createAccount" v-on:click="$emit('goBack', 'false')">Create account</router-link>
   </div>
 
   <div v-if="messageType ==  'failedLogin'" class="alert alert-warning" role="alert">
-        Wrong password or username! Try again!
+ <p> <i class="fas fa-exclamation-triangle"></i> </p>
+ Wrong password or username! Try again!
     <router-link class="nav-link" to="/login" v-on:click="$emit('goBack', 'false')">Sign in</router-link>
   </div>
 
   <div v-if="messageType ==  'accountDeleted'" class="alert alert-warning" role="alert">
+        <p><i class="fas fa-user-slash"></i></p>
         Sorry to see you leave! Your account is deleted! 
     <router-link class="nav-link" to="/createAccount" v-on:click="$emit('goBack', 'false')">Create new account</router-link>
   </div>

@@ -34,7 +34,7 @@ export default {
   <button class="movie-button"  v-on:click="$emit('chooseMovie', {...movie})"> {{movie.name}} </button>
     <p class="price" > {{movie.price}} $</p>
   <div class="cart">
-    <router-link class="buy-btn" to="/createAccount" >Buy </router-link>
+    <router-link class="buy-btn" to="/createAccount" >Buy <i class="fas fa-shopping-cart"></i> </router-link>
   </div>
   </div> 
   </div>

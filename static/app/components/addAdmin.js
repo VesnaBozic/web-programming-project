@@ -7,13 +7,13 @@ export default {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/myProfile">{{loggedUser.name}} profile</router-link>
+                    <router-link class="nav-link" to="/myProfile">{{loggedUser.name}} <i class="fas fa-user"></i></router-link>
                 </li>
                <li class="nav-item">
                     <router-link class="nav-link" to="/profile">Home</router-link>
                </li>
             </ul>
-            <button v-on:click.prevent="logOut()" class="btn btn-outline-success" type="submit">Log out</button>
+            <button v-on:click.prevent="logOut()" class="btn btn-outline-success" type="submit">Log out <i class="fas fa-sign-out-alt"></i></button>
         </div>
     </div>
 </nav>
@@ -27,16 +27,16 @@ export default {
         <h4>Add new administrator</h4>
         <div class="row">
             <div class="col-md-6">
-                <div class="inputs"> <label>Name</label> <input class="form-control" type="text" v-model="newAdministrator.name" > </div>
+                <div class="inputs"> <label>Name</label> <input class="form-control" type="text" v-model="newAdministrator.name" required > </div>
             </div>
             <div class="col-md-6">
-            <div class="inputs"> <label>Surname</label> <input class="form-control" type="text" v-model="newAdministrator.surname"  > </div>
+            <div class="inputs"> <label>Surname</label> <input class="form-control" type="text" v-model="newAdministrator.surname" required > </div>
         </div>
             <div class="col-md-6">
-                <div class="inputs"> <label>Username</label> <input class="form-control" type="text" v-model="newAdministrator.username"  > </div>
+                <div class="inputs"> <label>Username</label> <input class="form-control" type="text" v-model="newAdministrator.username"  required> </div>
             </div>
            <div class="col-md-6">
-                <div class="inputs"> <label>Password</label> <input class="form-control" type="text" v-model="newAdministrator.lozinka" > </div>
+                <div class="inputs"> <label>Password</label> <input class="form-control" type="text" v-model="newAdministrator.lozinka" required > </div>
             </div>
             <div v-if="created === true" class="col-md-6" class="alert-success" id="profile-alert" role="alert">
                 You successfully added new administrator!

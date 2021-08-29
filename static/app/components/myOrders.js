@@ -41,10 +41,10 @@ export default {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/myProfile">{{loggedUser.name}} profile</router-link>
+                    <router-link class="nav-link" to="/myProfile">{{loggedUser.name}} <i class="fas fa-user"></i></router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/profile">Home</router-link>
+                    <router-link class="nav-link" to="/profile">Home <i class="fas fa-home"></i></router-link>
                 </li>
             </ul>
         </div>
