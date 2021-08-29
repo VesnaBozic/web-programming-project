@@ -156,9 +156,12 @@ def get_movie(movie_id):
 def add_movies():
     db = mysql.get_db()
     cursor = db.cursor()
-    cursor.execute("INSERT INTO movies(poster_src, name, genre, year, price, decription, directors_id) VALUES(%(poster_src)s, %(name)s, %(genre)s, %(year)s, %(price)s, %(decription)s, %(directors_id)s)", flask.request.json)
-    db.commit()
-    return flask.request.json, 201
+    if(get_jwt().get("roles") == "administrator"):
+        cursor.execute("INSERT INTO movies(poster_src, name, genre, year, price, decription, directors_id) VALUES(%(poster_src)s, %(name)s, %(genre)s, %(year)s, %(price)s, %(decription)s, %(directors_id)s)", flask.request.json)
+        db.commit()
+        return flask.request.json, 201
+    else:
+        return "", 503
 
 @app.route("/api/movies/<int:movie_id>", methods=["PUT"])
 @jwt_required()
@@ -166,21 +169,27 @@ def change_movie(movie_id):
     movie = dict(flask.request.json)
     movie["movie_id"] = movie_id
     db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("UPDATE movies SET poster_src=%(poster_src)s , name=%(name)s, genre=%(genre)s, year=%(year)s, price=%(price)s, decription=%(decription)s, directors_id=%(directors_id)s  WHERE id=%(movie_id)s", movie)
-    db.commit()
-    cursor.execute("SELECT * FROM movies WHERE id=%s", (movie_id,))
-    movie = cursor.fetchone()
-    return flask.jsonify(movie)
+    if(get_jwt().get("roles") == "administrator"):
+        cursor = db.cursor()
+        cursor.execute("UPDATE movies SET poster_src=%(poster_src)s , name=%(name)s, genre=%(genre)s, year=%(year)s, price=%(price)s, decription=%(decription)s, directors_id=%(directors_id)s  WHERE id=%(movie_id)s", movie)
+        db.commit()
+        cursor.execute("SELECT * FROM movies WHERE id=%s", (movie_id,))
+        movie = cursor.fetchone()
+        return flask.jsonify(movie)
+    else:
+        return "", 503
 
 @app.route("/api/movies/<int:movie_id>", methods=["DELETE"])
 @jwt_required()
 def remove_movie(movie_id):
     db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("DELETE FROM movies WHERE id=%s", (movie_id, ))
-    db.commit()
-    return ""
+    if(get_jwt().get("roles") == "administrator"):
+        cursor = db.cursor()
+        cursor.execute("DELETE FROM movies WHERE id=%s", (movie_id, ))
+        db.commit()
+        return ""
+    else:
+        return "", 503
 
 # # # directors
 
@@ -204,10 +213,13 @@ def get_director(director_id):
 @jwt_required()
 def add_directors():
     db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("INSERT INTO directors( name, surname, image_src) VALUES( %(name)s, %(surname)s, %(image_src)s)", flask.request.json)
-    db.commit()
-    return flask.request.json, 201
+    if(get_jwt().get("roles") == "administrator"):
+        cursor = db.cursor()
+        cursor.execute("INSERT INTO directors( name, surname, image_src) VALUES( %(name)s, %(surname)s, %(image_src)s)", flask.request.json)
+        db.commit()
+        return flask.request.json, 201
+    else:
+        return "", 503
 
 @app.route("/api/directors/<int:director_id>", methods=["PUT"])
 @jwt_required()
@@ -215,25 +227,31 @@ def change_director(director_id):
     director = dict(flask.request.json)
     director["director_id"] = director_id
     db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("UPDATE directors SET name=%(name)s, surname=%(surname)s, image_src=%(image_src)s WHERE id=%(director_id)s", director)
-    db.commit()
-    cursor.execute("SELECT * FROM directors WHERE id=%s", (director_id,))
-    director = cursor.fetchone()
-    return flask.jsonify(director)
+    if(get_jwt().get("roles") == "administrator"):
+        cursor = db.cursor()
+        cursor.execute("UPDATE directors SET name=%(name)s, surname=%(surname)s, image_src=%(image_src)s WHERE id=%(director_id)s", director)
+        db.commit()
+        cursor.execute("SELECT * FROM directors WHERE id=%s", (director_id,))
+        director = cursor.fetchone()
+        return flask.jsonify(director)
+    else:
+        return "", 503
 
 @app.route("/api/directors/<int:director_id>", methods=["DELETE"])
 @jwt_required()
 def remove_director(director_id):
     db = mysql.get_db()
-    try:
-        cursor = db.cursor()
-        cursor.execute("DELETE FROM directors WHERE id=%s", (director_id, ))
-        db.commit()
-        return ""
-    except:
-        print("Error")
-        return "", 403
+    if(get_jwt().get("roles") == "administrator"):
+        try:
+            cursor = db.cursor()
+            cursor.execute("DELETE FROM directors WHERE id=%s", (director_id, ))
+            db.commit()
+            return ""
+        except:
+            print("Error")
+            return "", 403
+    else:
+        return "", 503
 
 
 #orders
@@ -242,24 +260,30 @@ def remove_director(director_id):
 @jwt_required()
 def get_all_orders():
     cursor = mysql.get_db().cursor()
-    cursor.execute("SELECT name, poster_src, movies.price, purchase_date, users_id FROM movies INNER JOIN movies.order ON movies.id=movies.order.movies_id")
-    orders = cursor.fetchall()
-    myOrders =[]
-    for order in orders:
-        if (order["users_id"] == get_jwt().get("id")):
-            myOrders.append(order)
-    
-    return flask.jsonify(myOrders)
+    if(get_jwt().get("roles") == "korisnik"):
+        cursor.execute("SELECT name, poster_src, movies.price, purchase_date, users_id FROM movies INNER JOIN movies.order ON movies.id=movies.order.movies_id")
+        orders = cursor.fetchall()
+        myOrders =[]
+        for order in orders:
+            if (order["users_id"] == get_jwt().get("id")):
+                myOrders.append(order)
+        
+        return flask.jsonify(myOrders)
+    else:
+        return "", 503
 
 
 @app.route("/api/orders", methods=["POST"])
 @jwt_required()
 def add_order():
     db = mysql.get_db()
-    cursor = db.cursor()
-    cursor.execute("INSERT INTO movies.order( price, purchase_date, users_id, movies_id) VALUES(  %(price)s,  %(purchase_date)s, %(users_id)s, %(movies_id)s)", flask.request.json)
-    db.commit()
-    return flask.request.json, 201
+    if(get_jwt().get("roles") == "korisnik"):
+        cursor = db.cursor()
+        cursor.execute("INSERT INTO movies.order( price, purchase_date, users_id, movies_id) VALUES(  %(price)s,  %(purchase_date)s, %(users_id)s, %(movies_id)s)", flask.request.json)
+        db.commit()
+        return flask.request.json, 201
+    else:
+        return "", 503
 
 
 
