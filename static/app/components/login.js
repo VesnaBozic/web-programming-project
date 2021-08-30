@@ -31,9 +31,7 @@ template: `
     </form>
   </div>
 </div>
-<footer v-if="message === false" id="main-footer">
-    <p>Your MOVIES &copy; 2021, All Rights reserved</p>    
-</footer>
+<page-footer v-if="message === false"></page-footer>
 
 <message-page v-on:goBack="goBack" v-if="message === true" v-bind:messageType="messageType"> </message-page>
 `,

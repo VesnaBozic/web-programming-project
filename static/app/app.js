@@ -21,6 +21,7 @@ import AddDirector from "./components/addDirector.js";
 import EditDirector from "./components/editDirector.js";
 import AddMovie from "./components/addMovie.js"
 import EditMovie from "./components/editMovie.js"
+import Footer from "./components/footer.js"
 
 
 
@@ -67,6 +68,7 @@ app.component('user-cart', Cart);
 app.component('edit-director', EditDirector);
 app.component('add-director', AddDirector);
 app.component('edit-movie', EditMovie);
+app.component('page-footer', Footer);
 
 
 app.use(router);

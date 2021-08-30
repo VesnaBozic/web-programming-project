@@ -15,6 +15,8 @@ def get_all_directors():
         cursor.execute("SELECT * FROM directors")
         directors = cursor.fetchall()
         return flask.jsonify(directors)
+    else:
+        return "", 503
 
 @directors_blueprint.route("/<int:director_id>")
 def get_director(director_id):
