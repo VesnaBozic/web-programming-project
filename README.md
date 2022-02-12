@@ -29,7 +29,7 @@ movies, directors
  
  ### Run this commands in active virtual environment:
  ```bash 
- SET FLASK_APP=python_file.py
+ SET FLASK_APP=main.py
  
  SET FLASK_ENV=development 
  
