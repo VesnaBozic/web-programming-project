@@ -35,3 +35,19 @@ movies, directors
  
  flask run
  ```
+ 
+ ### Install Flask-MySQL
+ 
+ Flask-MySQL is a Flask extension that allows you to access a MySQL database.
+ 
+ Use pip to install flask-mysql :
+ 
+ ```
+ pip install flask-mysql
+ ```
+ 
+ ### Install Flask-JWT-Extended
+ 
+ ```
+ pip install flask-jwt-extended
+ ```
