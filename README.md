@@ -1,4 +1,4 @@
-# Web programming project
+# Web programming project - Site for selling movies
 
 University project for Web programming. 
 
