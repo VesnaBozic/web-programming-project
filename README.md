@@ -2,13 +2,18 @@
 
 University project for Web programming. 
 
-Technologies used : Flask, Vue.js , HTML, CSS,
-MySQL.
+## Technologies used :
 
-It's possible to create an account as a client and log in as an administrator. A client
-can edit their profile setting, can see all movies in the database, add money to their account,
-and if they had enough money can buy a movie. Administrators can do CRUD operations with
-movies, directors
+
+## Project Description
+
+It's a site for selling movie. Visitor can see movies in a database.
+
+Visitor can create an account as a client and log in as an administrator.
+
+A client can edit their profile setting, can see all movies in the database, add money to their account, and if they had enough money can buy a movie.
+
+Administrators can do CRUD operations with movies, directors. Only existing administrator can add new administrator.
 
 # About Flask
 
