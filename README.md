@@ -4,6 +4,7 @@ University project for Web programming.
 
 ## Technologies used :
 
+![technologies](/assets/vuejs.png) ![technologies](/assets/flask.png) ![technologies](/assets/html5.png) ![technologies](/assets/css3.png) ![technologies](/assets/mysql.png)
 
 ## Project Description
 
@@ -11,7 +12,7 @@ It's a site for selling movie. Visitor can see movies in a database.
 
 Visitor can create an account as a client and log in as an administrator.
 
-A client can edit their profile setting, can see all movies in the database, add money to their account, and if they had enough money can buy a movie.
+A client can edit their profile setting, can see all movies and directors in the database, detals about movies, add money to their account, and if they had enough money can buy a movie. Client can search movies. A client can delete his account.
 
 Administrators can do CRUD operations with movies, directors. Only existing administrator can add new administrator.
 
@@ -32,7 +33,7 @@ Administrators can do CRUD operations with movies, directors. Only existing admi
  
  > **path\name\scripts\activate**
  
- ### Run this commands in active virtual environment:
+ ### To run app: run commands in active virtual environment:
  ```bash 
  SET FLASK_APP=main.py
  
