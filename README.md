@@ -19,7 +19,9 @@ A client can edit their profile setting, can see all movies and directors in the
 ![technologies](/assets/2.jpg)
 
 Client can buy movies.
+
 ![technologies](/assets/3.jpg)
+
 
 Administrators can do CRUD operations with movies, directors. Only existing administrator can add new administrator.
 
