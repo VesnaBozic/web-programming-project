@@ -8,11 +8,18 @@ University project for Web programming.
 
 ## Project Description
 
-It's a site for selling movie. Visitor can see movies in a database.
+It's a site for selling movie.
 
 Visitor can create an account as a client and log in as an administrator.
 
+![technologies](/assets/1.jpg)
+
 A client can edit their profile setting, can see all movies and directors in the database, detals about movies, add money to their account, and if they had enough money can buy a movie. Client can search movies. A client can delete his account.
+
+![technologies](/assets/2.jpg)
+
+Client can buy movies.
+![technologies](/assets/3.jpg)
 
 Administrators can do CRUD operations with movies, directors. Only existing administrator can add new administrator.
 
