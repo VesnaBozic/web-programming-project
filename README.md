@@ -25,6 +25,8 @@ Client can buy movies.
 
 Administrators can do CRUD operations with movies, directors. Only existing administrator can add new administrator.
 
+![technologies](/assets/4.jpg)
+
 # About Flask
 
  [**Link to Flask documentation**](https://flask.palletsprojects.com/en/2.0.x/)
